@@ -1,69 +1,106 @@
-# Legal Career Progression Game - Roblox Edition
+# Element Awakening - Roblox Game
 
-A strategic career simulation game where players start as law interns and progress through the legal system to become Supreme Court Justices.
+A dynamic power progression game where players discover and master elemental abilities.
 
 ## 🎮 Game Overview
 
-Players earn money and reputation by winning court cases, completing mandatory training programs (Judicial School), and making career decisions that shape their professional trajectory.
+Players are randomly awakened with elemental powers and must level them up through combat, quests, and challenges.
 
-## 📈 Career Progression
+## ⚡ Core Features
 
-```
-Intern → Public Defender → Attorney → Senior Counsel → Chief Prosecutor → Supreme Court Justice
-```
+### Element System
+- **Fire** - High damage, area attacks
+- **Void** - Dark magic, life steal abilities
+- **Lightning** - Fast attacks, chain damage
+- **Ice** - Freeze effects, crowd control
+- **Earth** - Defense, shields
+- **Wind** - Speed, evasion
 
-## ✨ Core Features
+### Progression
+- Level elemental powers (1-100)
+- Unlock new abilities at level milestones
+- Combine elements for combo effects
+- Skill points for customization
 
-- **Career Progression System**: Advance through 6 career levels
-- **Case Management**: Win cases to earn money and reputation
-- **Training Programs**: Complete mandatory "Judicial School" tutorial
-- **Reputation System**: Build credibility through case victories
-- **Financial Management**: Earn fees, manage expenses, invest in career development
-- **Court Cases**: 6 different case types with 4 difficulty levels
+### Combat System
+- Real-time PvE battles
+- PvP arenas
+- Dungeon raids
+- Boss fights
 
-## 🎯 Career Stages
+---
 
-### 1. Intern
-- Complete "Judicial School" training
-- Requirements: 3 cases won, 25 reputation
+# Kingdom Conquest - Roblox Game
 
-### 2. Public Defender
-- Handle criminal defense cases
-- Requirements: 10 cases won, 100 reputation
+A strategic guild-based game where guilds fight for dominance.
 
-### 3. Attorney
-- Private practice cases
-- Requirements: 20 cases won, 250 reputation
+## 👑 Core Features
 
-### 4. Senior Counsel
-- Complex litigation
-- Requirements: 40 cases won, 500 reputation
+### Territory Control
+- Capture and defend castles
+- Expand guild territory
+- Build defensive structures
+- Resource management
 
-### 5. Chief Prosecutor
-- Lead prosecution team
-- Requirements: 70 cases won, 1000 reputation
+### Guild System
+- Join or create guilds
+- Guild ranks and roles
+- Cooperative gameplay
+- Territory wars
 
-### 6. Supreme Court Justice
-- Final achievement
-- Requirements: 100 cases won, 2000 reputation
+### Resources
+- Gold - Purchase upgrades
+- Ore - Build structures
+- Wood - Fortifications
+- Food - Army maintenance
 
-## 💰 Case Types
+### Strategy Elements
+- Attack timing
+- Troop management
+- Tactical positioning
+- Alliance system
 
-1. **Criminal Defense** ($500 base)
-2. **Criminal Prosecution** ($600 base)
-3. **Civil Litigation** ($750 base)
-4. **Corporate Law** ($1500 base)
-5. **Constitutional Law** ($2000 base)
-6. **Administrative Law** ($400 base)
+---
 
-## 📦 Installation
+# Hunter Association - Roblox Game
+
+A mission-based progression system where hunters complete jobs and rank up.
+
+## 🎯 Core Features
+
+### Ranking System
+- **F Rank** - Beginner missions
+- **D Rank** - Easy tasks
+- **C Rank** - Moderate difficulty
+- **B Rank** - Challenging
+- **A Rank** - Very difficult
+- **S Rank** - Legendary
+
+### Mission Types
+- Hunting missions
+- Escort missions
+- Rescue operations
+- Exploration
+- Combat challenges
+
+### Progression
+- Complete missions for experience
+- Earn money and items
+- Unlock abilities
+- Advance rank
+
+### Equipment System
+- Weapons
+- Armor
+- Accessories
+- Upgradeable gear
+
+---
+
+## Installation
 
 1. Download repository as ZIP
 2. Extract files
 3. Open Roblox Studio
 4. Create new place
-5. Follow SETUP.md instructions
-
-## 📄 License
-
-MIT License
+5. Follow setup guide
