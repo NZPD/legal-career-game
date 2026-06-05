@@ -1,0 +1,11 @@
+*.rbxlx.backup
+*.rbxl.backup
+Backups/
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp
+*.swo
+*.tmp
+*~
