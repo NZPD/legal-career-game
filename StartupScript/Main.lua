@@ -1,74 +1,96 @@
--- Main.lua - Updated Game Hub
-print("\n" .. string.rep("=", 60))
-print("🎮 MULTI-GAME HUB - Starting Server")
-print(string.rep("=", 60))
+-- Main.lua
+print("\n" .. string.rep("=", 80))
+print("🎮 ULTIMATE GAME HUB - Starting Server")
+print("Element Awakening + Kingdom Conquest + Hunter Association")
+print(string.rep("=", 80))
 
-local PlayerData = require(game.ServerScriptService.GameSystems.PlayerData)
-local ElementSystem = require(game.ServerScriptService.GameSystems.ElementSystem)
-local HunterSystem = require(game.ServerScriptService.GameSystems.HunterSystem)
-local GuildSystem = require(game.ServerScriptService.GameSystems.GuildSystem)
-local GameHub = require(game.ServerScriptService.GameSystems.GameHub)
+-- Load all systems
+local PlayerManager = require(game.ServerScriptService.Systems.PlayerManager)
+local GameSystem = require(game.ServerScriptService.Systems.GameSystem)
+local CombatSystem = require(game.ServerScriptService.Systems.CombatSystem)
+local MissionSystem = require(game.ServerScriptService.Systems.MissionSystem)
+local GuildSystem = require(game.ServerScriptService.Systems.GuildSystem)
 
-print("✅ All systems loaded!\n")
+print("\n✅ All systems loaded!\n")
 
 local Players = game:GetService("Players")
-local playerDataStore = {}
+local PlayerData = {}
 
 function onPlayerAdded(player)
-    print("👤 Player joined: " .. player.Name)
+    print("🎮 Player joined: " .. player.Name)
     
-    local data = PlayerData.new(player)
-    playerDataStore[player.UserId] = data
+    -- Create player data
+    local data = PlayerManager.new(player)
+    data:awakenElement()
+    PlayerData[player.UserId] = data
     
-    -- Awaken their element
-    local element = data:awakeneElement()
-    
-    -- Show game hub
-    wait(1)
-    GameHub.displayMainHub()
-    
-    -- Display initial stats
     wait(1)
     data:displayStats()
 end
 
-function onPlayerRemoving(player)
-    print("👤 Player left: " .. player.Name)
-    playerDataStore[player.UserId] = nil
+function onPlayerRemoved(player)
+    print("❌ Player left: " .. player.Name)
+    PlayerData[player.UserId] = nil
 end
 
 Players.PlayerAdded:Connect(onPlayerAdded)
-Players.PlayerRemoving:Connect(onPlayerRemoving)
+Players.PlayerRemoving:Connect(onPlayerRemoved)
 
+-- Handle existing players
 for _, player in pairs(Players:GetPlayers()) do
     task.spawn(onPlayerAdded, player)
 end
 
--- Demo mode to show all systems
-print("\n📖 DEMO MODE ACTIVATED\n")
+-- DEMO MODE - Show all systems
+print(string.rep("=", 80))
+print("📋 SYSTEM DEMO")
+print(string.rep("=", 80))
 
--- Demo Element System
-print("--- ELEMENT SYSTEM DEMO ---")
-ElementSystem.displayElement("Fire")
+-- Demo 1: Element System
+print("\n[1/5] ELEMENT SYSTEM DEMO")
+GameSystem.displayElements()
 
--- Demo Hunter System
-print("--- HUNTER SYSTEM DEMO ---")
-HunterSystem.displayAvailableMissions("F")
+-- Demo 2: Create player and show stats
+print("[2/5] CREATING DEMO PLAYER")
+local demoPlayer = PlayerManager.new({Name = "DemoHero", UserId = 12345})
+demoPlayer.element = "Fire"
+demoPlayer:displayStats()
 
--- Demo Guild System
-print("--- GUILD SYSTEM DEMO ---")
-local demoGuild = GuildSystem.createGuild("Phoenix Rising", "FireLord")
-GuildSystem.addMember(demoGuild, "IceWizard")
-GuildSystem.addMember(demoGuild, "ThunderMage")
-GuildSystem.displayGuildStats(demoGuild)
+-- Demo 3: Learn ability
+print("[3/5] LEARNING ABILITY")
+GameSystem.learnAbility(demoPlayer, "Fireball")
+GameSystem.learnAbility(demoPlayer, "Inferno")
 
--- Demo Battle
-print("--- SIMULATING GUILD BATTLE ---")
-local enemyGuild = GuildSystem.createGuild("Shadow Syndicate", "DarkMaster")
-GuildSystem.addMember(enemyGuild, "NightBlade")
-GuildSystem.attackCastle(demoGuild, enemyGuild, 1)
+-- Demo 4: Show missions
+print("[4/5] HUNTER MISSIONS DEMO")
+MissionSystem.displayMissions("F")
 
-print("\n" .. string.rep("=", 60))
-print("✅ GAME SERVER READY!")
-print("Waiting for players...")
-print(string.rep("=", 60) .. "\n")
+-- Demo 5: Guild system
+print("[5/5] GUILD SYSTEM DEMO")
+local guild1 = GuildSystem.createGuild("Phoenix Rising", "FireLord")
+GuildSystem.addMember(1, "IceWizard")
+GuildSystem.addMember(1, "ThunderMage")
+GuildSystem.displayGuild(guild1)
+
+-- Demo battle
+local enemy = PlayerManager.new({Name = "Enemy", UserId = 99999})
+enemy.element = "Ice"
+enemy:gainExp(50, "test")
+
+print("[BONUS] BATTLE DEMO")
+CombatSystem.simulateBattle(demoPlayer, enemy, "Fireball")
+
+-- Demo castle attack
+print("[BONUS] GUILD WARFARE DEMO")
+local guild2 = GuildSystem.createGuild("Shadow Syndicate", "DarkMaster")
+GuildSystem.addMember(2, "NightBlade")
+GuildSystem.attackCastle(guild1, guild2, 1)
+
+print("\n" .. string.rep("=", 80))
+print("✅ SERVER READY!")
+print(string.rep("=", 80))
+print("\n🎮 GAME SYSTEMS:")
+print("  ⚡ Element Awakening - Level up your element and unlock abilities")
+print("  👑 Kingdom Conquest - Create guilds and conquer castles")
+print("  🏹 Hunter Association - Complete missions and climb ranks")
+print("\nWaiting for players...\n")

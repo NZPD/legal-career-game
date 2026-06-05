@@ -1,19 +1,22 @@
 -- GuildSystem.lua
--- Manages guild and kingdom conquest mechanics
+-- Handles guilds, castles, and territory wars
 
 local GuildSystem = {}
 
 local Castles = {
-    {id = 1, name = "Azure Castle", location = "North", defensePower = 100},
-    {id = 2, name = "Crimson Fortress", location = "South", defensePower = 120},
-    {id = 3, name = "Shadow Keep", location = "East", defensePower = 110},
-    {id = 4, name = "Golden Palace", location = "West", defensePower = 130},
-    {id = 5, name = "Dragon Spire", location = "Center", defensePower = 150}
+    {id = 1, name = "Azure Castle", location = "North", defense = 100},
+    {id = 2, name = "Crimson Fortress", location = "South", defense = 120},
+    {id = 3, name = "Shadow Keep", location = "East", defense = 110},
+    {id = 4, name = "Golden Palace", location = "West", defense = 130},
+    {id = 5, name = "Dragon Spire", location = "Center", defense = 150}
 }
 
-function GuildSystem.createGuild(guildName, leader)
+local Guilds = {}
+
+function GuildSystem.createGuild(name, leader)
     local guild = {
-        name = guildName,
+        id = #Guilds + 1,
+        name = name,
         leader = leader,
         members = {leader},
         level = 1,
@@ -22,62 +25,65 @@ function GuildSystem.createGuild(guildName, leader)
         castles = {},
         createdAt = os.time()
     }
+    table.insert(Guilds, guild)
     
-    print("\n✅ Guild created: " .. guildName)
+    print("\n" .. string.rep("=", 60))
+    print("✅ GUILD CREATED: " .. name)
     print("Leader: " .. leader)
-    print("Initial treasury: $10000")
+    print("Initial Treasury: $10000")
+    print(string.rep("=", 60) .. "\n")
     
     return guild
 end
 
-function GuildSystem.addMember(guild, player)
-    table.insert(guild.members, player)
-    print("✓ " .. player .. " joined guild " .. guild.name)
+function GuildSystem.addMember(guildId, player)
+    if Guilds[guildId] then
+        table.insert(Guilds[guildId].members, player)
+        print("✅ " .. player .. " joined " .. Guilds[guildId].name)
+        return true
+    end
+    return false
 end
 
-function GuildSystem.attackCastle(attackingGuild, defendingGuild, castleId)
-    local castle = nil
-    
-    for _, c in ipairs(Castles) do
-        if c.id == castleId then
-            castle = c
-            break
-        end
-    end
-    
+function GuildSystem.attackCastle(attackingGuild, defenderGuild, castleId)
+    local castle = Castles[castleId]
     if not castle then return false end
     
-    local attackPower = #attackingGuild.members * 50
-    local defensePower = castle.defensePower
-    if defendingGuild then
-        defensePower = defensePower + (#defendingGuild.members * 30)
+    local attackPower = #attackingGuild.members * 50 + attackingGuild.level * 20
+    local defensePower = castle.defense
+    
+    if defenderGuild then
+        defensePower = defensePower + (#defenderGuild.members * 30)
     end
     
-    local didAttackerWin = attackPower > defensePower
+    local didWin = attackPower > defensePower
     
-    print("\n" .. string.rep("=", 50))
-    print("⚡ BATTLE RESULTS")
-    print(string.rep("=", 50))
+    print("\n" .. string.rep("=", 60))
+    print("⚔️  GUILD BATTLE")
+    print(string.rep("=", 60))
     print("Attacker: " .. attackingGuild.name)
     print("Attack Power: " .. attackPower)
-    print("\nDefense Power: " .. defensePower)
+    print("\nDefending: " .. castle.name)
+    print("Defense Power: " .. defensePower)
     
-    if didAttackerWin then
-        print("\n🎉 VICTORY! " .. attackingGuild.name .. " captured " .. castle.name)
+    if didWin then
+        print("\n🏆 VICTORY!")
+        print(attackingGuild.name .. " captured " .. castle.name)
         table.insert(attackingGuild.castles, castle)
         attackingGuild.territory = attackingGuild.territory + 1
     else
-        print("\n😞 DEFEAT! " .. castle.name .. " is too well defended")
+        print("\n❌ DEFEAT")
+        print("Defense held strong!")
     end
     
-    print(string.rep("=", 50) .. "\n")
-    return didAttackerWin
+    print(string.rep("=", 60) .. "\n")
+    return didWin
 end
 
-function GuildSystem.displayGuildStats(guild)
-    print("\n" .. string.rep("=", 50))
-    print("💵 GUILD INFORMATION")
-    print(string.rep("=", 50))
+function GuildSystem.displayGuild(guild)
+    print("\n" .. string.rep("=", 60))
+    print("👑 GUILD INFORMATION")
+    print(string.rep("=", 60))
     print("Name: " .. guild.name)
     print("Leader: " .. guild.leader)
     print("Members: " .. #guild.members)
@@ -86,9 +92,13 @@ function GuildSystem.displayGuildStats(guild)
     print("Territory: " .. guild.territory)
     print("\nCastles:")
     for i, castle in ipairs(guild.castles) do
-        print(i .. ". " .. castle.name .. " (" .. castle.location .. ")")
+        print(i .. ". " .. castle.name)
     end
-    print(string.rep("=", 50) .. "\n")
+    print(string.rep("=", 60) .. "\n")
+end
+
+function GuildSystem.getCastles()
+    return Castles
 end
 
 return GuildSystem

@@ -1,74 +1,59 @@
-# Installation Guide
+# 🔧 Setup Instructions
 
-## Prerequisites
-- Roblox Studio
-- Basic understanding of scripts
+## Quick Setup (5 Scripts)
 
-## Step 1: Create Game Systems Folder
+### Step 1: Create Folder Structure
 1. Open Roblox Studio
 2. Create new place
-3. In ServerScriptService, create a Folder named "GameSystems"
+3. In `ServerScriptService`, create folder named `Systems`
 
-## Step 2: Add Server Scripts
+### Step 2: Add Scripts
 
-In `ServerScriptService/GameSystems/`, create these scripts:
+In `ServerScriptService/Systems/`, create 5 scripts:
 
-1. **PlayerData** - Manages all player data
-2. **ElementSystem** - Element powers system
-3. **HunterSystem** - Hunter missions and ranking
-4. **GuildSystem** - Guild and kingdom conquest
-5. **GameHub** - Main game hub menu
+1. **PlayerManager.lua**
+2. **GameSystem.lua**  
+3. **CombatSystem.lua**
+4. **MissionSystem.lua**
+5. **GuildSystem.lua**
 
-Copy the corresponding Lua code from the ServerScripts/ folder into each.
+Copy code from ServerScripts/ folder
 
-## Step 3: Add Main Script
+### Step 3: Add Main Script
 
-In `ServerScriptService` (not in GameSystems):
-1. Create Script named "Main"
-2. Copy content from StartupScript/Main.lua
+In `ServerScriptService` (not in Systems):
+- Create script named **Main.lua**
+- Copy from StartupScript/
 
-## Step 4: Test
+### Step 4: Test
 
-1. Press F5 to run
-2. Check Output window
-3. You should see demo output showing all systems
+Press F5 and check Output window
 
-## Game Selection
-
-When players join, they can choose:
-- **Element Awakening** - Elemental powers
-- **Kingdom Conquest** - Guild warfare
-- **Hunter Association** - Mission-based progression
-
-## Features
-
-### Element Awakening
-- 6 random elements
-- Level-up system
-- Ability unlocking
-- Skill points
-
-### Kingdom Conquest
-- Guild creation
-- Territory control
-- Castle battles
-- Resource management
-
-### Hunter Association
-- F to S rank progression
-- 18 different missions
-- Money and equipment
-- Experience rewards
-
-## Folder Structure
+## File Structure
 
 ```
 ServerScriptService/
-├── GameSystems/
-│   ├── PlayerData
-│   ├── ElementSystem
-│   ├── HunterSystem
-│   ├── GuildSystem
-│   └── GameHub
+├── Systems/
+│   ├── PlayerManager
+│   ├── GameSystem
+│   ├── CombatSystem  
+│   ├── MissionSystem
+│   └── GuildSystem
 └── Main
 ```
+
+## What Each Script Does
+
+**PlayerManager** - All player data, stats, progression  
+**GameSystem** - Element awakening, abilities  
+**CombatSystem** - Battles, combat calculations  
+**MissionSystem** - Missions, ranks, rewards  
+**GuildSystem** - Guilds, castles, territory  
+
+## Test Mode
+
+When you run the game, it displays:
+- Player stats
+- Available elements
+- Sample missions
+- Guild battles
