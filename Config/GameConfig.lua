@@ -1,13 +1,13 @@
--- GameConfig.lua
+-- GameConfig.lua (Updated)
 local GameConfig = {}
 
 GameConfig.CAREER_STAGES = {
-    {name = "Intern", level = 1},
-    {name = "Public Defender", level = 2},
-    {name = "Attorney", level = 3},
-    {name = "Senior Counsel", level = 4},
-    {name = "Chief Prosecutor", level = 5},
-    {name = "Supreme Court Justice", level = 6}
+    {name = "Intern", level = 1, maxCases = 5},
+    {name = "Public Defender", level = 2, maxCases = 8},
+    {name = "Attorney", level = 3, maxCases = 10},
+    {name = "Senior Counsel", level = 4, maxCases = 12},
+    {name = "Chief Prosecutor", level = 5, maxCases = 15},
+    {name = "Supreme Court Justice", level = 6, maxCases = 20}
 }
 
 GameConfig.CASE_TYPES = {
@@ -19,7 +19,7 @@ GameConfig.CASE_TYPES = {
     "Administrative Law"
 }
 
-GameConfig.DIFFICULTY_LEVELS = {"Easy", "Medium", "Hard", "Expert"}
+GameConfig.PHASES = {"Investigation", "Trial", "Verdict"}
 
 GameConfig.PROMOTION_REQUIREMENTS = {
     ["Intern"] = {casesWon = 3, reputation = 25},
